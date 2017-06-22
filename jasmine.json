@@ -1,0 +1,10 @@
+{
+  "spec_dir": "server",
+  "spec_files": [
+    "**/*.spec.ts"
+  ],
+  "helpers": [
+    "../jasmine.reporters.ts"
+  ],
+  "stopSpecOnExpectationFailure": false
+}
