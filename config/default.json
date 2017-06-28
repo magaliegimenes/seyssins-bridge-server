@@ -1,0 +1,36 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "mongodb": "mongodb://seyssinsbridge:Seyssins38@ds139122.mlab.com:39122/seyssinsbridge",
+  "public": "./public/",
+  "authentication": {
+    "secret": "U2V5c3NpbnNCcmlkZ2UzOFMzY3ImdA=="
+  },
+  "email": {
+    "enabled": true,
+    "support": "gimenes.magalie@gmail.com",
+    "from": "no_reply@seyssinsbridge.com",
+    "user": "",
+    "password": ""
+  },
+  "logger": {
+    "console": {
+      "enabled": true,
+      "level": "info"
+    },
+    "file": {
+      "enabled": true,
+      "level": "info",
+      "dirname": "logs",
+      "maxFiles": 15,
+      "maxSize": 5242880
+    },
+    "graylog": {
+      "enabled": false,
+      "level": "error",
+      "name": "FH API2",
+      "host": "fi-verification.fi.schneider-electric.com",
+      "port": 12213
+    }
+  }
+}
