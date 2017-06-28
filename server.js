@@ -1,3 +1,5 @@
+'use strict';
+
 //  OpenShift sample Node application
 const express = require('express');
 const fs = require('fs');

@@ -1,3 +1,5 @@
+'use strict';
+
 const Actualities = require('../services/actualities');
 const Users = require('../services/users');
 

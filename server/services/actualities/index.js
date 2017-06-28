@@ -1,3 +1,5 @@
+'use strict';
+
 const ActualityModel = require('./actualities.model');
 
 module.exports.get = (req, res) => {
