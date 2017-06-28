@@ -5,18 +5,14 @@
   "main": "server.js",
   "dependencies": {
     "body-parser": "https://registry.npmjs.org/body-parser/-/body-parser-1.17.1.tgz",
-    "chai": "^3.5.0",
-    "chai-http": "^2.0.1",
     "config": "https://registry.npmjs.org/config/-/config-1.26.1.tgz",
     "ejs": "^2.4.1",
     "express": "^4.13.4",
     "jsonwebtoken": "https://registry.npmjs.org/jsonwebtoken/-/jsonwebtoken-7.4.0.tgz",
     "lodash": "https://registry.npmjs.org/lodash/-/lodash-4.17.4.tgz",
     "mocha": "^2.4.5",
-    "mongodb": "^2.1.16",
     "mongoose": "https://registry.npmjs.org/mongoose/-/mongoose-4.9.8.tgz",
     "morgan": "^1.7.0",
-    "path": "^0.12.7",
     "serve-favicon": "https://registry.npmjs.org/serve-favicon/-/serve-favicon-2.4.2.tgz"
   },
   "engine": {
