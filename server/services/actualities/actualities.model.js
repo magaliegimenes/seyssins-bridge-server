@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 
 // set up a mongoose model and pass it using module.exports
 module.exports = mongoose.model('actualities', new Schema({
-  title: String,
-  color: String,
-  message: String
-}, {timestamp: true}));
+  title: { type : String, required: true },
+  color: { type : String, default: '000000' },
+  message: { type : String, required: true }
+}, {timestamps: true}));

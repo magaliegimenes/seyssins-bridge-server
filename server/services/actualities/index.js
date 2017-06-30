@@ -26,3 +26,16 @@ module.exports.post = (req, res) => {
       });
     });
 };
+
+module.exports.delete = (req, res) => {
+  let id = req.params.id;
+  return ActualityModel.remove({_id: id})
+    .then(() => {
+      res.send({message: 'actuality deleted'});
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: err.message
+      });
+    });
+};
