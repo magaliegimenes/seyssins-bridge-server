@@ -6,7 +6,6 @@ const config = require('config');
 const UserModel = require('./users.model');
 
 module.exports.isAuthenticated = (req, res, next) => {
-  console.log('test');
   const token = req.headers.authorization;
   jwt.verify(token, config.get('authentication').secret, function(err) {
     if (err) {
