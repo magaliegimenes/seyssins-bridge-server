@@ -41,6 +41,9 @@ db.connectDB()
     });
 
     routes.init(app);
+    app.use('*', (req, res) => {
+      res.redirect(config.get('publicHost'));
+    });
 
     app.listen(port, ip);
     console.log('Server running on http://%s:%s', ip, port);
