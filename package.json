@@ -4,6 +4,7 @@
   "description": "Node.js sample app for OpenShift 3",
   "main": "server.js",
   "dependencies": {
+    "bcrypt": "^1.0.2",
     "body-parser": "https://registry.npmjs.org/body-parser/-/body-parser-1.17.1.tgz",
     "config": "https://registry.npmjs.org/config/-/config-1.26.1.tgz",
     "cors": "^2.8.3",
