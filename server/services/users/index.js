@@ -6,6 +6,7 @@ const config = require('config');
 const UserModel = require('./users.model');
 
 module.exports.isAuthenticated = (req, res, next) => {
+  console.log('test');
   const token = req.headers.authorization;
   jwt.verify(token, config.get('authentication').secret, function(err) {
     if (err) {
@@ -23,7 +24,7 @@ module.exports.authenticate = (req, res) => {
   })
     .then(userFromDB => {
       if (!userFromDB) {
-        throw new Error('User does not exist');
+        throw {code: 404, message: 'User does not exist'};
       }
       user = userFromDB;
       // todo check password
@@ -45,6 +46,7 @@ module.exports.authenticate = (req, res) => {
       } else {
         // if user is found and password is wrong
         res.status(401).json({
+          code: 403,
           success: false,
           message: 'password does not match'
         });
@@ -52,8 +54,9 @@ module.exports.authenticate = (req, res) => {
     })
     .catch(err => {
       res.status(401).send({
+        code: err.code || '500',
         status: 'failed',
-        message: err.message
+        message: err.message || 'Unknown error'
       })
     })
 };

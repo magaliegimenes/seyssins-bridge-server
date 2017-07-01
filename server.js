@@ -2,6 +2,7 @@
 
 //  OpenShift sample Node application
 const express = require('express');
+const cors = require('cors');
 const fs = require('fs');
 const ejs = require('ejs');
 const morgan = require('morgan');
@@ -21,6 +22,8 @@ db.connectDB()
 
     app.engine('html', require('ejs').renderFile);
     app
+      .options('*', cors())
+      .use(cors())
       .use(morgan('combined'))
       .use(favicon(path.join(config.get('public'), 'favicon.ico')))
       .use('/', express.static(config.get('public')))
