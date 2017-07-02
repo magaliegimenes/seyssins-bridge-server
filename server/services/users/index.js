@@ -3,7 +3,8 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const config = require('config');
-const UserModel = require('./users.model');
+const UserModel = require('./users.model').UserModel;
+const AdminModel = require('./users.model').AdminModel;
 
 module.exports.isAuthenticated = (req, res, next) => {
   const token = req.headers.authorization;
@@ -17,23 +18,23 @@ module.exports.isAuthenticated = (req, res, next) => {
 };
 
 module.exports.authenticate = (req, res) => {
-  let user;
-  UserModel.findOne({
+  let admin;
+  AdminModel.findOne({
     username: req.body.username
   })
-    .then(userFromDB => {
-      if (!userFromDB) {
+    .then(adminFromDB => {
+      if (!adminFromDB) {
         throw {code: 404, message: 'User does not exist'};
       }
-      user = userFromDB;
+      admin = adminFromDB;
       // todo check password
-      return bcrypt.compare(req.body.password, user.password);
+      return bcrypt.compare(req.body.password, admin.password);
     })
     .then(doesMatch => {
       if (doesMatch) {
         // if user is found and password is right
         // create a token
-        const token = jwt.sign(user, config.get('authentication').secret, {
+        const token = jwt.sign(admin, config.get('authentication').secret, {
           expiresIn: 3600 // expires in 1 hour
         });
 
@@ -63,20 +64,41 @@ module.exports.authenticate = (req, res) => {
 module.exports.post = (req, res) => {
   bcrypt.hash('admin-pwd', 10)
     .then(hash => {
-      const user = new UserModel({
+      const admin = new AdminModel({
         username: 'bridge-admin',
         password: hash,
         admin: true
       });
-      console.log(user);
-      return user.save();
+      return admin.save();
     })
-    .then(user => {
-      res.status(200).send(user);
+    .then(admin => {
+      res.status(200).send(admin);
     })
     .catch(err => {
       res.status(500).send({
         status: 'failed',
+        message: err.message
+      })
+    });
+};
+
+module.exports.addUser = (req, res) => {
+  const user = new UserModel({
+    email: req.body.email
+  });
+  user.save()
+    .then(user => {
+      res.status(200).send(user);
+    })
+    .catch(err => {
+      if (err.code === 11000) {
+        res.status(500).send({
+          code: 403,
+          message: 'email has already subscribed'
+        })
+      }
+      res.status(500).send({
+        code: 500,
         message: err.message
       })
     });

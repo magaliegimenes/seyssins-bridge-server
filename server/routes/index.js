@@ -10,5 +10,6 @@ module.exports.init = (app) => {
   app.delete('/api/actualities/:id', Users.isAuthenticated, Actualities.delete);
   app.get('/api/auth', Users.isAuthenticated, (req, res) => res.status(200).send({status: 'authenticated'}));
   app.post('/api/auth', Users.authenticate);
+  app.post('/api/add-user', Users.addUser);
   app.post('/set-user', Users.isAuthenticated, Users.post);
 };
