@@ -37,8 +37,7 @@ module.exports.post = (req, res) => {
         from: 'noreply.seyssins.bridge@gmail.com',
         to: _.map(users, 'email'),
         subject: 'Nouveauté sur le site de Seyssins!',
-        html: `<h3>${actuality.title}</h3>
-                ${actuality.message}`
+        html: `<h3>${actuality.title}</h3>${actuality.message}`
       };
       transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
@@ -50,7 +49,6 @@ module.exports.post = (req, res) => {
       });
     })
     .catch(err => {
-
       res.status(500).send({
         message: err.message
       });
