@@ -1,6 +1,17 @@
 'use strict';
+const nodemailer = require('nodemailer');
+const _ = require('lodash');
 
 const CompetitionModel = require('./competitions.model');
+const UserModel = require('../users/users.model').UserModel;
+
+const transporter = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: {
+    user: 'noreply.seyssins.bridge@gmail.com', // Your email id
+    pass: 'Seyssins38' // Your password
+  }
+});
 
 module.exports.get = (req, res) => {
   return CompetitionModel.find().sort('-createdAt')
@@ -19,6 +30,23 @@ module.exports.post = (req, res) => {
   return competition.save()
     .then(competitionSaved => {
       res.send(competitionSaved);
+      return UserModel.find().exec();
+    })
+    .then(users => {
+      const mailOptions = {
+        from: 'noreply.seyssins.bridge@gmail.com',
+        bcc: _.map(users, 'email'),
+        subject: 'Nouveauté sur le site de Seyssins!',
+        html: `<h3>${competition.title}</h3>${competition.message}`
+      };
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log('Mail was not sent.');
+          console.log(error);
+        } else {
+          console.log('Message sent: ' + info.response);
+        }
+      });
     })
     .catch(err => {
       res.status(500).send({

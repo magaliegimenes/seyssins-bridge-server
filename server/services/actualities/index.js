@@ -35,7 +35,7 @@ module.exports.post = (req, res) => {
     .then(users => {
       const mailOptions = {
         from: 'noreply.seyssins.bridge@gmail.com',
-        to: _.map(users, 'email'),
+        bcc: _.map(users, 'email'),
         subject: 'Nouveauté sur le site de Seyssins!',
         html: `<h3>${actuality.title}</h3>${actuality.message}`
       };
