@@ -3,7 +3,7 @@
   "port": 3030,
   "mongodb": "mongodb://seyssinsbridge:Seyssins38@ds139122.mlab.com:39122/seyssinsbridge",
   "public": "./public/",
-  "publicHost": "http://club-seyssins-bridge.7e14.starter-us-west-2.openshiftapps.com",
+  "publicHost": "http://club.seyssinsbridge.com",
   "authentication": {
     "secret": "U2V5c3NpbnNCcmlkZ2UzOFMzY3ImdA=="
   },
