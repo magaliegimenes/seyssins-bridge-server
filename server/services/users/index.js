@@ -5,10 +5,11 @@ const bcrypt = require('bcrypt');
 const config = require('config');
 const UserModel = require('./users.model').UserModel;
 const AdminModel = require('./users.model').AdminModel;
+const Mail = require('../../core/mail');
 
 module.exports.isAuthenticated = (req, res, next) => {
   const token = req.headers.authorization;
-  jwt.verify(token, config.get('authentication').secret, function(err) {
+  jwt.verify(token, config.get('authentication').secret, function (err) {
     if (err) {
       res.status(401).send({message: err.message});
       return;
@@ -83,23 +84,30 @@ module.exports.post = (req, res) => {
 };
 
 module.exports.addUser = (req, res) => {
-  const user = new UserModel({
-    email: req.body.email
-  });
-  user.save()
-    .then(user => {
-      res.status(200).send(user);
+  Mail.addUserToList(req.body.email)
+    .then(() => {
+      res.status(200).send({message: 'email has subscribed to list'});
     })
     .catch(err => {
-      if (err.code === 11000) {
-        res.status(500).send({
-          code: 403,
-          message: 'email has already subscribed'
-        })
+      switch (err.error.title) {
+        case 'Member Exists' :
+          res.status(500).send({
+            code: 403,
+            message: 'email has already subscribed'
+          });
+          break;
+        case 'Invalid Resource' :
+          res.status(500).send({
+            code: 401,
+            message: 'email is not valid'
+          });
+          break;
+        default:
+          res.status(500).send({
+            code: 500,
+            message: err.error
+          });
+          break;
       }
-      res.status(500).send({
-        code: 500,
-        message: err.message
-      })
     });
 };

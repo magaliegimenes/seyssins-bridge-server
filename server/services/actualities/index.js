@@ -4,6 +4,7 @@ const _ = require('lodash');
 
 const ActualityModel = require('./actualities.model');
 const UserModel = require('../users/users.model').UserModel;
+const Files = require('../files');
 
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
@@ -78,4 +79,11 @@ module.exports.delete = (req, res) => {
         message: err.message
       });
     });
+};
+
+module.exports.uploadPicture = (req, res) => {
+  let id = req.params.id;
+  return ActualityModel.findOne({_id: id})
+    .then(actuality => Files.uploadPicture(actuality, req.files))
+    .then(actuality => res.send(actuality))
 };

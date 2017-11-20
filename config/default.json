@@ -10,9 +10,11 @@
   "email": {
     "enabled": true,
     "support": "gimenes.magalie@gmail.com",
-    "from": "no_reply@seyssinsbridge.com",
-    "user": "",
-    "password": ""
+    "from": "no_reply.seyssins.bridge@gmail.com",
+    "fromName": "Club de Bridge de Seyssins",
+    "mailChimpURL": "https://us17.api.mailchimp.com/3.0/",
+    "mailChimpAPI": "584d61cfb0990a0481f746f36de49aba-us17",
+    "mailChimpList": "1ce63edc1e"
   },
   "logger": {
     "console": {
@@ -29,9 +31,9 @@
     "graylog": {
       "enabled": false,
       "level": "error",
-      "name": "FH API2",
-      "host": "fi-verification.fi.schneider-electric.com",
-      "port": 12213
+      "name": "SeyssinsBridge",
+      "host": "",
+      "port": 0
     }
   }
 }

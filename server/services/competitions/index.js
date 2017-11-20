@@ -4,6 +4,7 @@ const _ = require('lodash');
 
 const CompetitionModel = require('./competitions.model');
 const UserModel = require('../users/users.model').UserModel;
+const Files = require('../files');
 
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
@@ -78,4 +79,11 @@ module.exports.delete = (req, res) => {
         message: err.message
       });
     });
+};
+
+module.exports.uploadPicture = (req, res) => {
+  let id = req.params.id;
+  return CompetitionModel.findOne({_id: id})
+    .then(competition => Files.uploadPicture(competition, req.files))
+    .then(competition => res.send(competition))
 };
