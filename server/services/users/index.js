@@ -3,7 +3,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const config = require('config');
-const UserModel = require('./users.model').UserModel;
 const AdminModel = require('./users.model').AdminModel;
 const Mail = require('../../core/mail');
 

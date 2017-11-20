@@ -1,6 +1,5 @@
 const config = require('config');
 const rp = require('request-promise');
-const md5 = require('md5');
 
 const CAMPAIGN = 'campaigns';
 const EDIT_CONTENT = 'content';
