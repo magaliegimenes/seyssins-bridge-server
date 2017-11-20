@@ -15,7 +15,7 @@ module.exports.createCampaign = (subject, content) => {
     method: 'POST',
     uri: campaignURL,
     headers: {
-      Authorization: `apikey ${config.get('email').mailChimpAPI}`
+      Authorization: `apikey ${process.env.MAIL_CHIMP_API}`
     },
     body: {
       recipients: {list_id: config.get('email').mailChimpList},
@@ -36,7 +36,7 @@ module.exports.createCampaign = (subject, content) => {
         method: 'PUT',
         uri: `${campaignURL}/${campaignId}/${EDIT_CONTENT}`,
         headers: {
-          Authorization: `apikey ${config.get('email').mailChimpAPI}`
+          Authorization: `apikey ${process.env.MAIL_CHIMP_API}`
         },
         body: {
           html: content
@@ -50,7 +50,7 @@ module.exports.createCampaign = (subject, content) => {
         method: 'POST',
         uri: `${campaignURL}/${campaignId}/${SEND_ACTION}`,
         headers: {
-          Authorization: `apikey ${config.get('email').mailChimpAPI}`
+          Authorization: `apikey ${process.env.MAIL_CHIMP_API}`
         },
         body: {},
         json: true
@@ -70,7 +70,7 @@ module.exports.addUserToList = (email) => {
     method: 'POST',
     uri: newMemberURL,
     headers: {
-      Authorization: `apikey ${config.get('email').mailChimpAPI}`
+      Authorization: `apikey ${process.env.MAIL_CHIMP_API}`
     },
     body: {
       email_address: email,
