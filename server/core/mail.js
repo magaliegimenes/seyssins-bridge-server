@@ -9,6 +9,10 @@ const LIST = 'lists';
 const MEMBERS = 'members';
 
 module.exports.createCampaign = (subject, content) => {
+  if (!config.get('email').enabled) {
+    console.log('Mail sending process is disabled.');
+    return Promise.resolve();
+  }
   let campaignId;
   const campaignURL = `${config.get('email').mailChimpURL}/${CAMPAIGN}`;
   const createCampaignOptions = {

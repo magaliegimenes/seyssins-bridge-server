@@ -6,7 +6,9 @@
       <script value="start" />
     </scripts>
     <node-interpreter value="project" />
-    <envs />
+    <envs>
+      <env name="DROPBOX_TOKEN" value="MI9pFHWsSEAAAAAAAAAADml269pOOlpgACGR4NS6uUIocR5uEMS57fjMvCl6G1aR" />
+    </envs>
     <method />
   </configuration>
 </component>

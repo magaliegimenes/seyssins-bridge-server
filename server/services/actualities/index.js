@@ -4,7 +4,7 @@ const _ = require('lodash');
 
 const ActualityModel = require('./actualities.model');
 const UserModel = require('../users/users.model').UserModel;
-const Files = require('../files');
+const Files = require('../../core/file');
 
 const transporter = nodemailer.createTransport({
   service: 'Gmail',

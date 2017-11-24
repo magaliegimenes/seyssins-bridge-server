@@ -10,5 +10,5 @@ module.exports = mongoose.model('clublife', new Schema({
   color: {type: String, default: '#000000'},
   message: {type: String, required: true},
   attachment: {type: String},
-  picture: {type: Buffer}
+  dropboxPath: {type: String}
 }, {timestamps: true}));

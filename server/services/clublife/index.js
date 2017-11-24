@@ -2,7 +2,7 @@
 const request = require('request');
 
 const Mail = require('../../core/mail');
-const _ = require('lodash');
+const Files = require('../../core/file');
 
 const ClublifeModel = require('./clublife.model');
 
@@ -53,12 +53,40 @@ module.exports.put = (req, res) => {
 module.exports.delete = (req, res) => {
   let id = req.params.id;
   return ClublifeModel.remove({_id: id})
-    .then(() => {
-      res.send({message: 'clublife info deleted'});
+    .then((clDeleted) => {
+      if (clDeleted.dropboxPath) {
+        return Files.deleteFile(clDeleted.dropboxPath)
+          .catch((err) => console.log('file deletion has failed after clublife deletion', err));
+      }
     })
+    .then(() => res.send({message: 'clublife info deleted'}))
     .catch(err => {
       res.status(500).send({
         message: err.message
       });
     });
+};
+
+
+module.exports.uploadFile = (req, res) => {
+  let id = req.params.id;
+  return ClublifeModel.findOne({_id: id})
+    .then(clublife => Files.uploadFile(clublife, req.file))
+    .then(clublife => clublife.save())
+    .then(clublife => res.send(clublife))
+    .catch(err => {
+      console.log(err);
+      res.status(500).send({message: 'Upload not achieved', code: err.code, error: err});
+    })
+};
+
+module.exports.getFile = (req, res) => {
+  let id = req.params.id;
+  return ClublifeModel.findOne({_id: id})
+    .then(clublife => Files.getFile(clublife))
+    .then(urlData => res.send(urlData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).send({message: 'File not found'});
+    })
 };

@@ -1,16 +1,12 @@
 {
-  "host": "localhost",
-  "port": 3030,
-  "mongodb": "mongodb://seyssinsbridge:Seyssins38@ds139122.mlab.com:39122/seyssinsbridge",
-  "public": "./public/",
-  "publicHost": "http://club.seyssinsbridge.com",
-  "uploadLimit": 5000000,
-  "authentication": {
-    "secret": "U2V5c3NpbnNCcmlkZ2UzOFMzY3ImdA=="
-  },
+  "host": "heroku",
   "email": {
-    "enabled": false,
-    "support": "gimenes.magalie@gmail.com"
+    "enabled": true,
+    "support": "gimenes.magalie@gmail.com",
+    "from": "no_reply.seyssins.bridge@gmail.com",
+    "fromName": "Club de Bridge de Seyssins",
+    "mailChimpURL": "https://us17.api.mailchimp.com/3.0/",
+    "mailChimpList": "1ce63edc1e"
   },
   "logger": {
     "console": {
