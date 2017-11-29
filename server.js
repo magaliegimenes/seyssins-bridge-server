@@ -26,11 +26,10 @@ db.connectDB()
       .use(cors())
       .use(morgan('combined'))
       .use(favicon(path.join(config.get('public'), 'favicon.ico')))
-      .use((req, res, next) => {
+      .use((req, res) => {
         if (!req.secure) {
-          res.redirect(config.get('publicHost') + req.url);
+          res.redirect(config.get('publicHost'));
         }
-        next();
       })
       .use('/', express.static(config.get('public')))
       // use body parser so we can get info from POST and/or URL parameters
@@ -41,7 +40,7 @@ db.connectDB()
       ip = process.env.IP || '0.0.0.0';
 
     // error handling
-    app.use((err, req, res, next) => {
+    app.use((err, req, res) => {
       console.error(err.stack);
       res.status(500).send('Something bad happened!');
     });
