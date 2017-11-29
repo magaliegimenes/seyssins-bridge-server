@@ -27,10 +27,10 @@ db.connectDB()
       .use(morgan('combined'))
       .use(favicon(path.join(config.get('public'), 'favicon.ico')))
       .use((req, res, next) => {
-        if (!req.secure) {
-          res.redirect(config.get('publicHost') + req.url);
+        if(req.headers['x-forwarded-proto'] === 'https'){
+          return next();
         }
-        next();
+        res.redirect(config.get('publicHost'));
       })
       .use('/', express.static(config.get('public')))
       // use body parser so we can get info from POST and/or URL parameters
@@ -41,7 +41,7 @@ db.connectDB()
       ip = process.env.IP || '0.0.0.0';
 
     // error handling
-    app.use((err, req, res, next) => {
+    app.use((err, req, res) => {
       console.error(err.stack);
       res.status(500).send('Something bad happened!');
     });
