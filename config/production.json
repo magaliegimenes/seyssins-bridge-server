@@ -1,0 +1,32 @@
+{
+  "host": "heroku",
+  "publicHost": "http://82562fb77952414188d5195c4ea827c6.yatu.ws/",
+  "email": {
+    "enabled": false,
+    "support": "gimenes.magalie@gmail.com",
+    "from": "no_reply.seyssins.bridge@gmail.com",
+    "fromName": "Club de Bridge de Seyssins",
+    "mailChimpURL": "https://us17.api.mailchimp.com/3.0/",
+    "mailChimpList": "1ce63edc1e"
+  },
+  "logger": {
+    "console": {
+      "enabled": true,
+      "level": "info"
+    },
+    "file": {
+      "enabled": true,
+      "level": "info",
+      "dirname": "logs",
+      "maxFiles": 15,
+      "maxSize": 5242880
+    },
+    "graylog": {
+      "enabled": false,
+      "level": "error",
+      "name": "SeyssinsBridge",
+      "host": "",
+      "port": 0
+    }
+  }
+}
