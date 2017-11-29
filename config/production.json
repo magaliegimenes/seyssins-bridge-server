@@ -1,6 +1,6 @@
 {
   "host": "heroku",
-  "publicHost": "http://82562fb77952414188d5195c4ea827c6.yatu.ws/",
+  "publicHost": "https://gandi.seyssinsbridge.com/",
   "email": {
     "enabled": false,
     "support": "gimenes.magalie@gmail.com",
