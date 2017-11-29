@@ -1,6 +1,3 @@
-'use strict';
-
-//  OpenShift sample Node application
 const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
@@ -30,7 +27,7 @@ db.connectDB()
         if(req.headers['x-forwarded-proto'] === 'https'){
           return next();
         }
-        res.redirect(config.get('publicHost'));
+        res.redirect(config.get('publicHost') + req.url);
       })
       .use('/', express.static(config.get('public')))
       // use body parser so we can get info from POST and/or URL parameters
