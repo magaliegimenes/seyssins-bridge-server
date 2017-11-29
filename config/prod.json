@@ -1,5 +1,6 @@
 {
   "host": "heroku",
+  "publicHost": "https://club.seyssinsbridge.com/",
   "email": {
     "enabled": true,
     "support": "gimenes.magalie@gmail.com",

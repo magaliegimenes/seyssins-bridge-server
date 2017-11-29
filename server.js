@@ -35,14 +35,17 @@ db.connectDB()
       ip = process.env.IP || '0.0.0.0';
 
     // error handling
-    app.use(function (err, req, res, next) {
+    app.use((err, req, res, next) => {
       console.error(err.stack);
       res.status(500).send('Something bad happened!');
     });
 
     routes.init(app);
     app.use('*', (req, res) => {
-      res.redirect(config.get('publicHost'));
+      if (!req.secure) {
+        return res.redirect(config.get('publicHost') + req.url);
+      }
+      return res.redirect(config.get('publicHost'));
     });
 
     app.listen(port, ip);
