@@ -37,12 +37,6 @@ db.connectDB()
     const port = process.env.PORT || 8080,
       ip = process.env.IP || '0.0.0.0';
 
-    // error handling
-    app.use((err, req, res) => {
-      console.error(err.stack);
-      res.status(500).send('Something bad happened!');
-    });
-
     routes.init(app);
     app.use('*', (req, res) => {
       return res.redirect(config.get('publicHost'));
