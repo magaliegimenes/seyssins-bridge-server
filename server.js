@@ -26,6 +26,12 @@ db.connectDB()
       .use(cors())
       .use(morgan('combined'))
       .use(favicon(path.join(config.get('public'), 'favicon.ico')))
+      .use((req, res, next) => {
+        if (!req.secure) {
+          res.redirect(config.get('publicHost') + req.url);
+        }
+        next();
+      })
       .use('/', express.static(config.get('public')))
       // use body parser so we can get info from POST and/or URL parameters
       .use(bodyParser.urlencoded({extended: false}))
@@ -42,9 +48,6 @@ db.connectDB()
 
     routes.init(app);
     app.use('*', (req, res) => {
-      if (!req.secure) {
-        return res.redirect(config.get('publicHost') + req.url);
-      }
       return res.redirect(config.get('publicHost'));
     });
 
