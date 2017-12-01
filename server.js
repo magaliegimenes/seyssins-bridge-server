@@ -24,9 +24,10 @@ db.connectDB()
       .use(morgan('combined'))
       .use(favicon(path.join(config.get('public'), 'favicon.ico')))
       .use((req, res, next) => {
-        if(req.headers['x-forwarded-proto'] === 'https'){
+        if(!config.get('secure') || req.headers['x-forwarded-proto'] === 'https'){
           return next();
         }
+        console.log('Redirect to secure route');
         res.redirect(config.get('publicHost') + req.url);
       })
       .use('/', express.static(config.get('public')))

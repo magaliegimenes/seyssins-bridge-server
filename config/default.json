@@ -1,8 +1,9 @@
 {
   "host": "localhost",
   "publicHost": "http://localhost:4200/",
+  "secure": false,
+  "mongodb": "mongodb://seyssinsbridge:Seyssins38@ds127126.mlab.com:27126/seyssins-bridge-test",
   "port": 3030,
-  "mongodb": "mongodb://seyssinsbridge:Seyssins38@ds139122.mlab.com:39122/seyssinsbridge",
   "public": "./public/",
   "uploadLimit": 5000000,
   "authentication": {

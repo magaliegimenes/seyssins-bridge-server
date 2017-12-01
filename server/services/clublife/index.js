@@ -32,7 +32,7 @@ module.exports.post = (req, res) => {
       throw err;
     })
     .then(() => {
-      const subject = 'Nouveauté sur le site de Seyssins!';
+      const subject = 'Nouveauté sur le site de Seyssins Bridge !';
       const html = `<h3>${clublife.title}</h3>${clublife.message}`;
       Mail.createCampaign(subject, html);
     });
@@ -52,15 +52,17 @@ module.exports.put = (req, res) => {
 
 module.exports.delete = (req, res) => {
   let id = req.params.id;
-  return ClublifeModel.remove({_id: id})
+  return ClublifeModel.findOneAndRemove({_id: id})
     .then((clDeleted) => {
       if (clDeleted.dropboxPath) {
         return Files.deleteFile(clDeleted.dropboxPath)
-          .catch((err) => console.log('file deletion has failed after clublife deletion', err));
+          .then(() => console.log('Dropbox file deletion has completed', clDeleted.dropboxPath))
+          .catch((err) => console.log('Dropbox file deletion has failed after clublife deletion', err));
       }
     })
-    .then(() => res.send({message: 'clublife info deleted'}))
+    .then(() => res.send({message: 'Clublife info deleted'}))
     .catch(err => {
+      console.log(err);
       res.status(500).send({
         message: err.message
       });

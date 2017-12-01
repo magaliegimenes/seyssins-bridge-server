@@ -61,6 +61,7 @@ module.exports.getFile = (model) => {
 };
 
 module.exports.deleteFile = (dropboxPath) => {
+  const dbx = new Dropbox({accessToken: process.env.DROPBOX_TOKEN});
   return dbx.filesDelete({path: dropboxPath})
 };
 

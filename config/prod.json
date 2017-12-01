@@ -1,6 +1,8 @@
 {
   "host": "heroku",
   "publicHost": "https://club.seyssinsbridge.com/",
+  "secure": true,
+  "mongodb": "mongodb://seyssinsbridge:Seyssins38@ds139122.mlab.com:39122/seyssinsbridge",
   "email": {
     "enabled": true,
     "support": "gimenes.magalie@gmail.com",

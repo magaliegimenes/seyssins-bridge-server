@@ -1,6 +1,8 @@
 {
-  "host": "heroku",
+  "host": "gandi",
   "publicHost": "https://gandi.seyssinsbridge.com/",
+  "secure": true,
+  "mongodb": "mongodb://seyssinsbridge:Seyssins38@ds139122.mlab.com:39122/seyssinsbridge",
   "email": {
     "enabled": false,
     "support": "gimenes.magalie@gmail.com",
