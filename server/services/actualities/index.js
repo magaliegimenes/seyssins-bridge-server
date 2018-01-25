@@ -26,7 +26,7 @@ module.exports.post = (req, res) => {
     })
     .then(() => {
       const subject = 'Nouveauté sur le site de Seyssins Bridge !';
-      const html = `<h3>${clublife.title}</h3>${clublife.message}`;
+      const html = `<h3>${actuality.title}</h3>${actuality.message}`;
       Mail.createCampaign(subject, html);
     })
     .catch(err => {
