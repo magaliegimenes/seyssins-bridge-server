@@ -10,7 +10,7 @@ class Database {
   }
 
   connectDB() {
-    let mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL || config.get('mongodb');
+    let mongoURL = process.env.MONGO_URL || config.get('mongodb');
 
     if (!mongoURL) {
       return Promise.reject();

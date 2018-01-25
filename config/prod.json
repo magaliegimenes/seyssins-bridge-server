@@ -6,7 +6,7 @@
   "email": {
     "enabled": true,
     "support": "gimenes.magalie@gmail.com",
-    "from": "no_reply.seyssins.bridge@gmail.com",
+    "from": "noreply.seyssins.bridge@gmail.com",
     "fromName": "Club de Bridge de Seyssins",
     "mailChimpURL": "https://us17.api.mailchimp.com/3.0/",
     "mailChimpList": "1ce63edc1e"
