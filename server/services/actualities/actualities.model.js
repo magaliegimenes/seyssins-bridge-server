@@ -8,5 +8,7 @@ const Schema = mongoose.Schema;
 module.exports = mongoose.model('actualities', new Schema({
   title: { type : String, required: true },
   color: { type : String, default: '#000000' },
-  message: { type : String, required: true }
+  message: { type : String, required: true },
+  attachment: {type: String},
+  dropboxPath: {type: String}
 }, {timestamps: true}));
